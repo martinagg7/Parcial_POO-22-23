@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-
+from weapon_type import WeaponType
 
 """
 This Python module contains not only the class Pokemon, but also the test of
