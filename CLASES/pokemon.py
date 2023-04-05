@@ -104,7 +104,7 @@ class Pokemon():
     def __str__(self):#este el constructor
         return "Pokemon ID "+ str(self.__ID) +" with name "+ str(self.__pokemon_name) +" has as weapon "+ str(self.__weapon_type.name) +" and health "+ str(self.__health_points)
     def __del__(self):#este es el destructor
-       print("El pokemon con ID"+ str(self.__ID) +"fue eliminado")
+       print("El pokemon con ID"+ str(self.__ID) +" fue eliminado")
 
     def get_pokemon_name(self):
         return self.__pokemon_name
