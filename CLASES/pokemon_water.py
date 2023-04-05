@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-
+from pokemon import Pokemon
+from weapon_type import WeaponType
+import random
 
 """
 This Python module contains not only the class Pokemon, but also the test of
@@ -36,6 +38,7 @@ this Python class.
 
 
 class PokemonWater():
+    
     """Python class to implement a basic version of a Pokemon of the game.
 
     This Python class implements the basic version of a Pokemon of the game.
@@ -68,7 +71,50 @@ class PokemonWater():
       >>> from weapon_type import WeaponType
       >>> obj_Pokemon = PokemonWater(1, "Squirtle", WeaponType.PUNCH, 100, 7, 10)
     """
+    def __init__(self, ID,pokemon_name,weapon_type,health_points,attack_rating,defense_rating):
+        
+        #introducimos los atributos
+        self.__ID=ID
+        self.__pokemon_name=pokemon_name
+        self.__weapon_type=weapon_type
+        self.__health_points=health_points
+        self.__attack_rating=random.randint(11,20)
+        self.__defense_rating=defense_rating
 
+            
+    def __str__(self):#este el constructor
+        return "Pokemon ID "+ str(self.__ID) +" with name "+ str(self.__pokemon_name) +" has as weapon "+ str(self.__weapon_type.name) +" and health "+ str(self.__health_points)
+    def __del__(self):#este es el destructor
+       print("El pokemon con ID"+ str(self.__ID) +" fue eliminado")
+        #Getters
+    def get_pokemon_name(self):
+        return self.__pokemon_name
+    def get_weapon_type(self):
+        return self.__weapon_type
+    def get_health_points(self):
+        return self.__health_points
+    def get_attack_rating(self):
+        return self.__attack_rating
+    def get_defense_rating(self):
+        return self.__defense_rating
+    
+        #Comprobar si el pokemon esta vivo
+    def is_alive(self):
+        if self.__health_points>0:
+            return True
+        else:
+            return False
+        #Defensa de un pokemon
+    def fight_defense(self, damage):
+        if self.__defense_rating > damage:
+            return True
+        
+        else:
+            self.__health_points -= damage - self.__defense_rating
+            return True
+        #Atacar a otro pokemon
+    def fight_attack(self, pokemon):      
+        return pokemon.fight_defense(self.__attack_rating)
 
 def main():
     """Function main of the module.
