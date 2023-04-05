@@ -38,53 +38,21 @@ this Python class.
 
 
 class PokemonAir(Pokemon):
-
-    """Python class to implement a basic version of a Pokemon of the game.
-
-    This Python class implements the basic version of a Pokemon of the game.
-
-    Syntax
-    ------
-      obj = PokemonAir(id, pokemon_name, weapon_type, health_points,
-                         attack_rating, defense_rating)
-
-    Parameters
-    ----------
-      [in] id ID of the Pokemon.
-      [in] pokemon_name Name of the Pokemon.
-      [in] weapon_type Type of weapon that carries out the Pokemon.
-      [in] health_points Points of health that the Pokemon has.
-      [in] attack_rating Attack rating of the Pokemon.
-      [in] defense_rating Defense rating of the Pokemon.
-
-    Returns
-    -------
-      obj Python object output parameter that represents an instance
-          of the class Pokemon.
-
-    Attributes
-    ----------
-
-    Example
-    -------
-      >>> from pokemon import Pokemon
-      >>> from weapon_type import WeaponType
-      >>> obj_Pokemon = PokemonEarth(1, "Pidgey", WeaponType.PUNCH, 100, 7, 10)
-    """
-    def __init__(self, ID,pokemon_name,weapon_type,health_points,attack_ratting,defense_rating):
+    def __init__(self, ID, pokemon_name, weapon_type, health_points, attack_rating, defense_rating):        
+        #introducimos los atributos
         self.__ID=ID
         self.__pokemon_name=pokemon_name
         self.__weapon_type=weapon_type
         self.__health_points=health_points
-        self.__attack_rating=attack_ratting
-        self.__defense_rating=random.randint(11,20)#hacemos que el indice de defensa de los pokemons de aire este entre 11 y 20
-    
+        self.__attack_rating=attack_rating
+        self.__defense_rating=defense_rating
 
+            
     def __str__(self):#este el constructor
         return "Pokemon ID "+ str(self.__ID) +" with name "+ str(self.__pokemon_name) +" has as weapon "+ str(self.__weapon_type.name) +" and health "+ str(self.__health_points)
     def __del__(self):#este es el destructor
        print("El pokemon con ID"+ str(self.__ID) +" fue eliminado")
-
+    #Getters
     def get_pokemon_name(self):
         return self.__pokemon_name
     def get_weapon_type(self):
@@ -96,22 +64,29 @@ class PokemonAir(Pokemon):
     def get_defense_rating(self):
         return self.__defense_rating
     
- 
+    #Comprobar si el pokemon esta vivo
     def is_alive(self):
         if self.__health_points>0:
             return True
         else:
             return False
         #Defensa de un pokemon
-    def fight_defense(self, damage):
+    def fight_defense(self, damage):#cambiamos la defensa para que haya un 50% de posibilidad de que no se pueda atacar al pokemon
+        posibilidad_random=random.randint(0,1)
         if self.__defense_rating > damage:
             return True
-        
+        elif posibilidad_random<=0.5:
+            print("El ataque no ha sido efectivo")
         else:
             self.__health_points -= damage - self.__defense_rating
             return True
+    #Atacar a otro pokemon
     def fight_attack(self, pokemon):      
         return pokemon.fight_defense(self.__attack_rating)
+
+
+
+
         
 
 def main():

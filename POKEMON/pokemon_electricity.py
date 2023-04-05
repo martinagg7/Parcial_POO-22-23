@@ -111,8 +111,8 @@ class PokemonElectricity(Pokemon):
             return True
     #cambiamos el ataque para que haya el 50% de posibilidad de doblar este
     def fight_attack(self, pokemon):
-        posibilidad_doblar_ataque = random.randint(0, 100)
-        if posibilidad_doblar_ataque >= 50:
+        posibilidad_doblar_ataque = random.randint(0, 1)
+        if posibilidad_doblar_ataque >= 0.50:
             return pokemon.fight_defense(self.__attack_rating)*2
         else:
             return pokemon.fight_defense(self.__attack_rating)
