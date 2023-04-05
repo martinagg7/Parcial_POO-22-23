@@ -105,7 +105,7 @@ class Pokemon():
         return "Pokemon ID "+ str(self.__ID) +" with name "+ str(self.__pokemon_name) +" has as weapon "+ str(self.__weapon_type.name) +" and health "+ str(self.__health_points)
     def __del__(self):#este es el destructor
        print("El pokemon con ID"+ str(self.__ID) +" fue eliminado")
-
+    #Getters
     def get_pokemon_name(self):
         return self.__pokemon_name
     def get_weapon_type(self):
@@ -117,7 +117,7 @@ class Pokemon():
     def get_defense_rating(self):
         return self.__defense_rating
     
- 
+    #Comprobar si el pokemon esta vivo
     def is_alive(self):
         if self.__health_points>0:
             return True
