@@ -57,18 +57,7 @@ def get_data_from_user(name_file):
     -------
       >>> list_pokemons = get_data_from_user("file.csv")
     """
-    list_pokemons = []
-    with open(name_file, "r") as file:
-      reader=csv.reader(file)
-      for row in reader:
-        ID,name_pokemon,weapon_type,health_points,attack_rating,defense_rating=row
-        try:
-          Pokemon=Pokemon(ID,name_pokemon,weapon_type,health_points,attack_rating,defense_rating)
-        except:
-          print("El archivo CSV no contiene los datos necesarios")
-    return list_pokemons
-datos_1=get_data_from_user("coach_1_pokemons.csv")
-datos_2=get_data_from_user("coach_2_pokemons.csv")
+  
     
           
 
