@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 import csv
 from pokemon import Pokemon
+  
 
 """
 This Python method contains the application of the Game.
@@ -30,8 +31,14 @@ This Python method contains the application of the Game.
               prohibited without the written consent of the copyright owner.
 """
 
-
-# Source packages.
+class Pokemon():
+  def __init__(self, ID, pokemon_name, weapon_type, health_points, attack_rating, defense_rating):
+    self.ID = ID
+    self.pokemon_name = pokemon_name
+    self.weapon_type = weapon_type
+    self.health_points = health_points
+    self.attack_rating = attack_rating
+    self.defense_rating = defense_rating
 
 
 
@@ -57,7 +64,42 @@ def get_data_from_user(name_file):
     -------
       >>> list_pokemons = get_data_from_user("file.csv")
     """
-  
+    list_pokemons = []
+    with open(name_file, 'r') as file:
+        reader = csv.reader(file)
+        for row in reader:
+            try:
+                ID = int(row[0])
+                pokemon_name = row[1]
+                weapon_type = row[2]
+                health_points = int(row[3])
+                attack_rating = int(row[4])
+                defense_rating = int(row[5])
+                pokemon = Pokemon(ID, pokemon_name, weapon_type, health_points, attack_rating, defense_rating)
+                list_pokemons.append(pokemon)
+            except ValueError:
+                print("Algo no funciona con el archivo")
+    return list_pokemons
+
+coach_1_pokemons=get_data_from_user("/Users/martinagarciagonzalez/Desktop/Parcial_POO-22-23-main/DATA/coach_1_pokemons.csv")
+coach_2_pokemons=get_data_from_user("/Users/martinagarciagonzalez/Desktop/Parcial_POO-22-23-main/DATA/coach_2_pokemons.csv")
+
+coach_1=[]
+coach_2=[]
+
+for pokemon in coach_1_pokemons:
+    coach_1.append(pokemon.pokemon_name)
+for pokemon in coach_2_pokemons:
+    coach_2.append(pokemon.pokemon_name)
+
+print("Estos son los pokemon de coach 1:")
+print(coach_1)
+print("Estos son los pokemon de coach 2:")
+print(coach_2)
+
+
+
+
     
           
 
