@@ -2,6 +2,8 @@
 # -*- coding: utf-8 -*-
 import csv
 from pokemon import Pokemon
+from weapon_type import WeaponType
+from enum import Enum
   
 
 """
@@ -29,8 +31,15 @@ This Python method contains the application of the Game.
 @copyright :  Copyright 2021 GNU AFFERO GENERAL PUBLIC.
               All rights are reserved. Reproduction in whole or in part is
               prohibited without the written consent of the copyright owner.
-"""
 
+  
+"""
+#son las mismas clases que en  pokemon.py y weapon_type.py
+class Weapon_type(Enum):
+  KICK= 4
+  PUNCH= 2
+  ELBOW= 6
+  HEADBUTT= 10
 class Pokemon():
   def __init__(self, ID, pokemon_name, weapon_type, health_points, attack_rating, defense_rating):
     self.ID = ID
@@ -39,22 +48,22 @@ class Pokemon():
     self.health_points = health_points
     self.attack_rating = attack_rating
     self.defense_rating = defense_rating
-      #Comprobar si el pokemon esta vivo
-    def is_alive(self):
+      #Comprobar si el pokemon esta vivo 
+  def is_alive(self):
         if self.health_points>0:
             return True
         else:
             return False
         #Defensa de un pokemon
-    def fight_defense(self, damage):
-        if self.defense_rating > damage:
-            return True
+  def fight_defense(self, damage):
+      if self.defense_rating > damage:
+          return True
         
-        else:
-            self.health_points -= damage - self.defense_rating
-            return True
+      else:
+          self.health_points -= damage - self.defense_rating
+          return True
     #Atacar a otro pokemon
-    def fight_attack(self, pokemon):      
+  def fight_attack(self, pokemon):      
         return pokemon.fight_defense(self.attack_rating)
   
 
@@ -82,12 +91,36 @@ def get_data_from_user(name_file):
     -------
       >>> list_pokemons = get_data_from_user("file.csv")
     """
-
-
-
+    list_pokemons = []
+    with open(name_file, newline='') as csvfile:
+        data = csv.reader(csvfile)
+        for row in data:
+            ID, pokemon_name, weapon_type, health_points, attack_rating, defense_rating = row
+            weapon_type = weapon_type.upper()
+            if weapon_type == "KICK":
+                weapon_type = Weapon_type.KICK
+            elif weapon_type == "PUNCH":
+                weapon_type = Weapon_type.PUNCH
+            elif weapon_type == "ELBOW":
+                weapon_type = Weapon_type.ELBOW
+            elif weapon_type == "HEADBUTT":
+                weapon_type = Weapon_type.HEADBUTT
+            else:
+                weapon_type = None
+            if weapon_type is not None:
+                pokemon = Pokemon(int(ID), pokemon_name, weapon_type, int(health_points), int(attack_rating), int(defense_rating))
+                list_pokemons.append(pokemon)
+    return list_pokemons
 
 coach_1_pokemons=get_data_from_user("/Users/martinagarciagonzalez/Desktop/Parcial_POO-22-23-main/DATA/coach_1_pokemons.csv")
 coach_2_pokemons=get_data_from_user("/Users/martinagarciagonzalez/Desktop/Parcial_POO-22-23-main/DATA/coach_2_pokemons.csv")
+print("Coach 1 Pokemons:")
+for pokemon in coach_1_pokemons:#imprimos los pokemons de cada entrenador
+  print(f"{pokemon.pokemon_name} = Pokemon({pokemon.ID}, '{pokemon.pokemon_name}', Weapon_type.{pokemon.weapon_type.name}, {pokemon.health_points}, {pokemon.attack_rating}, {pokemon.defense_rating})")
+
+print("Coach 2 Pokemons:") 
+for pokemon in coach_2_pokemons:
+   print(f"{pokemon.pokemon_name} = Pokemon({pokemon.ID}, '{pokemon.pokemon_name}', Weapon_type.{pokemon.weapon_type.name}, {pokemon.health_points}, {pokemon.attack_rating}, {pokemon.defense_rating})")
 
 
 
