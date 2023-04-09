@@ -199,6 +199,25 @@ def coach_is_undefeated(list_of_pokemons):
         return False
 
 
+
+
+    print("Welcome to the Game.")
+    print("Let's start to set the configuration of each game user. \n")
+
+    # Get configuration for Game User 1.
+
+
+    # Get configuration for Game User 2.
+
+
+    print("------------------------------------------------------------------")
+    print("The Game starts...")
+    print("------------------------------------------------------------------")
+
+
+
+
+def main():
     """Function main of the module.
 
     The function main of this module is used to perform the Game.
@@ -220,95 +239,80 @@ def coach_is_undefeated(list_of_pokemons):
       >>> main()
     """
 
-    print("Welcome to the Game.")
-    print("Let's start to set the configuration of each game user. \n")
+    class Coach:
+        def __init__(self, name, pokemons):
+            self.name = name
+            self.pokemons = pokemons
+            self.defeated_pokemons = []
 
-    # Get configuration for Game User 1.
-
-
-    # Get configuration for Game User 2.
-
-
+        def is_undefeated(self):
+            for pokemon in self.pokemons:
+                if pokemon not in self.defeated_pokemons:
+                    return True
+            return False
     print("------------------------------------------------------------------")
     print("The Game starts...")
     print("------------------------------------------------------------------")
+    # Define la función battle
+    def battle(pokemon1, coach1, pokemon2, coach2):
+        print(f"{pokemon1.pokemon_name} vs {pokemon2.pokemon_name}")
+        while pokemon1.is_alive() and pokemon2.is_alive():
+            pokemon2.fight_defense(pokemon1.fight_attack(pokemon2))
+            if pokemon2.is_alive():
+                pokemon1.fight_defense(pokemon2.fight_attack(pokemon1))
+        if not pokemon1.is_alive():
+            print(f"{pokemon2.pokemon_name} gana!")
+            coach1.defeated_pokemons.append(pokemon1)
+        else:
+            print(f"{pokemon1.pokemon_name} gana!")
+            coach2.defeated_pokemons.append(pokemon2)
 
-    # Get a copy of the list of pokemons:
-    #definimos la clase coach porque para el enfrentamiento de los pokemons necesitamos saber el nombre del entrenador y los pokemons que tiene
-class Coach:
-      def __init__(self, name, pokemons):
-        self.name = name
-        self.pokemons = pokemons
-        self.defeated_pokemons = []
+    #Vamos a super que game_user_1 es el coach 1 y game_user_2 es el coach 2  
+    coach_1_pokemons = get_data_from_user("/Users/martinagarciagonzalez/Desktop/Parcial_POO-22-23-main/DATA/coach_1_pokemons.csv")
+    coach_2_pokemons = get_data_from_user("/Users/martinagarciagonzalez/Desktop/Parcial_POO-22-23-main/DATA/coach_2_pokemons.csv")
 
-      def is_undefeated(self):
-        for pokemon in self.pokemons:
-            if pokemon not in self.defeated_pokemons:
-                return True
-        return False
+  
 
+    # Creamos los entrenadores
+    coach_1 = Coach("Coach 1", coach_1_pokemons)
+    coach_2 = Coach("Coach 2", coach_2_pokemons)
 
-    # Choose first pokemons
-
-#Vamos a super que game_user_1 es el coach 1 y game_user_2 es el coach 2  
-coach_1_pokemons=get_data_from_user("/Users/martinagarciagonzalez/Desktop/Parcial_POO-22-23-main/DATA/coach_1_pokemons.csv")
-coach_2_pokemons=get_data_from_user("/Users/martinagarciagonzalez/Desktop/Parcial_POO-22-23-main/DATA/coach_2_pokemons.csv")
-
-
-# Define la función battle
-def battle(pokemon1, coach1, pokemon2, coach2):
-    print(f"{pokemon1.pokemon_name} vs {pokemon2.pokemon_name}")
-    while pokemon1.is_alive() and pokemon2.is_alive():
-        pokemon2.fight_defense(pokemon1.fight_attack(pokemon2))
-        if pokemon2.is_alive():
-            pokemon1.fight_defense(pokemon2.fight_attack(pokemon1))
-    if not pokemon1.is_alive():
-        print(f"{pokemon2.pokemon_name} gana!")
-        coach1.defeated_pokemons.append(pokemon1)
-    else:
-        print(f"{pokemon1.pokemon_name} gana!")
-        coach2.defeated_pokemons.append(pokemon2)
-
-# Leemos los archivos csv con la funcion get_data_from_user
-coach_1_pokemons = get_data_from_user("/Users/martinagarciagonzalez/Desktop/Parcial_POO-22-23-main/DATA/coach_1_pokemons.csv")
-coach_2_pokemons = get_data_from_user("/Users/martinagarciagonzalez/Desktop/Parcial_POO-22-23-main/DATA/coach_2_pokemons.csv")
-# Creamos los entrenadores
-coach_1=Coach("Coach 1", coach_1_pokemons)
-coach_2=Coach("Coach 2", coach_2_pokemons)
-
-# Creamos las listas de los pokemons de cada entrenador
-print("Game User 1 Pokemons:")
-for pokemon_str in coach_1_list:
-    print(pokemon_str)
-print("Game User 2 Pokemons:")
-for pokemon_str in coach_2_list:
-    print(pokemon_str)
-
-# Enfrentamiento de los Pokémon de cada entrenador
-while coach_1_pokemons and coach_2_pokemons:
-    pokemon_coach_1 = random.choice(coach_1_pokemons)
-    pokemon_coach_2 = random.choice(coach_2_pokemons)
-    battle(pokemon_coach_1, coach_1, pokemon_coach_2, coach_2)
-    if not coach_1_pokemons[0].is_alive():
-        coach_1_pokemons.pop(0)#vamos eliminando losm pokemons que van muriendo
-    if not coach_2_pokemons[0].is_alive():
-        coach_2_pokemons.pop(0)
-
-# Determinamos el ganador del juego
-if not coach_1_pokemons:
-    print("Game User 2 ha ganado!")
-    print("Estadísticas Game User 2:")
-    for pokemon in coach_2_pokemons:
-        print(pokemon.pokemon_name + " tiene " + str(pokemon.health_points) + " puntos de vida aun.")
-else:
-    print("Game User 1 ha ganado!")
-    print("Estadísticas Game User 1:")
-    for pokemon in coach_1_pokemons:
-        print(pokemon.pokemon_name + " tiene " + str(pokemon.health_points) + " puntos de vida aun.")
+    # Creamos las listas de los pokemons de cada entrenador
+    print("Game User 1 Pokemons:")
+    for pokemon_str in coach_1_list:
+        print(pokemon_str)
+    print("Game User 2 Pokemons:")
+    for pokemon_str in coach_2_list:
+        print(pokemon_str)
+        
+    print("------------------------------------------------------------------")
+    print("The Game has end...")
+    print("------------------------------------------------------------------")
+    # Enfrentamiento de los Pokémon de cada entrenador
+    while coach_1_pokemons and coach_2_pokemons:
+        pokemon_coach_1 = random.choice(coach_1_pokemons)
+        pokemon_coach_2 = random.choice(coach_2_pokemons)
+        battle(pokemon_coach_1, coach_1, pokemon_coach_2, coach_2)
+        if not coach_1_pokemons:
+            print("Game User 2 ha ganado!")
+            print("Statitics User 2:")
+            print(pokemon.pokemon_name + " tiene " + str(pokemon.health_points) + " puntos de vida aun.")
+        else:
+            print("Game User 1 ha ganado!")
+            print("Statitics User 1:")
+            print(pokemon.pokemon_name + " tiene " + str(pokemon.health_points) + " puntos de vida aun.")
 
 
 
 
+
+
+# Checking whether this module is executed just itself alone.
+if __name__ == "__main__":
+    main()
+
+
+# EOF
 
 
 
@@ -329,4 +333,4 @@ else:
 
 
 
-# EOF
+
