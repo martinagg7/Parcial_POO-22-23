@@ -1,7 +1,9 @@
 # Parcial_POO-22-23
-Resuelto el ejercicio propuesto de Pokemons .Importando las librerias Enum ,csv,pandas para leer los archivos y random
+Resuelto el ejercicio propuesto de Pokemons 
+
+Importando las librerias Enum ,csv,pandas para leer los archivos y random
 ## Datos
-  nombre_usuario:martinagg7 /link_repo:
+  nombre_usuario:martinagg7 /link_repo:https://github.com/martinagg7/Parcial_POO-22-23.git
   
 ## Localización ficheros
   <em>Pokemon</em>
