@@ -1,2 +1,3 @@
 # Parcial_POO-22-23
-parcial Poo
+
+nombre_usuario:martinagg7 /link_repo:
